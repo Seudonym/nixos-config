@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: 
+{ config, pkgs, inputs, ... }: 
 
 {
   programs.hyprland = {
@@ -10,8 +10,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    inputs.unstable.legacyPackages."${pkgs.system}".neovim
     git
-    neovim
     fzf
     ripgrep
     wget
@@ -19,6 +19,9 @@
     zoxide
     jamesdsp
     wl-clipboard
+
+    hyprpaper
+    brightnessctl
 
     zip
     unzip
@@ -31,4 +34,5 @@
     xdg-desktop-portal-gtk
     xdg-desktop-portal-wlr
   ];
+
 }
