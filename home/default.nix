@@ -8,6 +8,7 @@
   
   home.file = {
     "wahid/.config/nvim".source = ./config/nvim;
+    "wahid/.config/hypr".source = ./config/hypr;
   };
 
   home.username = "wahid";
