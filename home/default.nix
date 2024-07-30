@@ -7,8 +7,7 @@
 
   
   home.file = {
-    ".config/nvim".source = ./config/nvim;
-    ".config/hypr".source = ./config/hypr;
+    "wahid/.config/nvim".source = ./config/nvim;
   };
 
   home.username = "wahid";
@@ -51,7 +50,7 @@
     accountsservice
     grim
     wl-clipboard
-    wl-recorder
+    onlyoffice-bin
     
     asusctl
     supergfxctl
