@@ -6,13 +6,13 @@
   ];
 
   
-  home.file = {
-    "wahid/.config/nvim".source = ./config/nvim;
-    "wahid/.config/hypr".source = ./config/hypr;
-  };
-
   home.username = "wahid";
   home.homeDirectory = "/home/wahid";
+
+  home.file."wahid/.config/nvim" = {
+    source = ./config/nvim;
+    recursive = true;
+  };
 
   home.packages = with pkgs; [
     obsidian
