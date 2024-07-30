@@ -11,20 +11,21 @@
 
   environment.systemPackages = with pkgs; [
     inputs.unstable.legacyPackages."${pkgs.system}".neovim
-    git
     fzf
     ripgrep
     wget
     curl
     zoxide
-    jamesdsp
     wl-clipboard
 
-    hyprpaper
+    swww
     brightnessctl
 
-    zip
-    unzip
+    
+    libnotify
+    mako
+    
+
     wofi
 
     qt5.qtwayland

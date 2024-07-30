@@ -1,18 +1,81 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
+  imports = [ 
+    inputs.ags.homeManagerModules.default
+  ];
+
+  
+  home.file = {
+    ".config/nvim".source = ./config/nvim;
+    ".config/hypr".source = ./config/hypr;
+  };
+
   home.username = "wahid";
   home.homeDirectory = "/home/wahid";
 
   home.packages = with pkgs; [
-    neofetch
+    obsidian
+    brave
+    discord
+    spotify
+
+    # Lang tools
+    clang
+    lua
+    (pkgs.python3.withPackages (python-pkgs: [
+      python-pkgs.pip
+      python-pkgs.requests
+    ]))
+    bun
+
+    # Misc
+    qbittorrent
+
+    # LSPs
+    clang-tools
+    pyright
+    lua-language-server
+
+    # User packages
+    git
+    jamesdsp
+    zip
+    unzip
+    fd
+    gtksourceview
+    dart-sass
+    gtk3
+    gtk3
+    webkitgtk
+    accountsservice
+    grim
+    wl-clipboard
+    wl-recorder
+    
+    asusctl
+    supergfxctl
+    swappy
+    wayshot
+    hyprpicker
   ];
 
-    programs.git = {
-      enable = true;
-      userName = "Wahid Khan";
-      userEmail = "wk170179@gmail.com";
-    };
+  programs.git = {
+    enable = true;
+    userName = "Wahid Khan";
+    userEmail = "wk170179@gmail.com";
+  };
+
+  programs.ags = {
+    enable = true;
+    extraPackages = with pkgs; [
+      gtksourceview
+      dart-sass
+      gtk3
+      webkitgtk
+      accountsservice
+    ];
+  };
 
   home.stateVersion = "24.05";
   programs.home-manager.enable = true;
