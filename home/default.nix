@@ -9,8 +9,12 @@
   home.username = "wahid";
   home.homeDirectory = "/home/wahid";
 
-  home.file."wahid/.config/nvim" = {
+  home.file.".config/nvim" = {
     source = ./config/nvim;
+    recursive = true;
+  };
+  home.file.".config/hypr" = {
+    source = ./config/hypr;
     recursive = true;
   };
 
