@@ -7,33 +7,23 @@
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
-
 
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
   };
 
+  virtualisation.docker.enable = true;
+
   programs.hyprland = {
     enable = true;
-    withUWSM = true;
     xwayland.enable = true;
   };
 
+  # services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.lightdm.enable = false;
   programs.waybar.enable = true;
-
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --remember-session --sessions ${pkgs.hyprland}/share/wayland-sessions";
-        user = "greeter";
-      };
-    };
-  };
 
   services.xserver = {
     enable = true;
@@ -71,16 +61,6 @@
     noto-fonts
   ];
 
-  systemd.services.greetd.serviceConfig = {
-    Type = "idle";
-    StandardInput = "tty";
-    StandardOutput = "tty";
-    StandardError = "journal";
-    TTYReset = true;
-    TTYVHangup = true;
-    TTYVTDisallocate = true;
-  };
-
   networking.hostName = "zephyrus"; # Define your hostname.
   networking.networkmanager.enable = true;
   time.timeZone = "Asia/Kolkata";
@@ -101,7 +81,7 @@
   security = {
     rtkit.enable = true;
     polkit.enable = true;
-    pam.services.hyprlock = {};
+    # pam.services.hyprlock = {};
   };
   hardware.graphics.enable = true;
   hardware.nvidia = {
@@ -124,7 +104,7 @@
   users.users.wahid = {
     isNormalUser = true;
     description = "Wahid Khan";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
     	brave
       ghostty
@@ -143,6 +123,7 @@
     nil
 
   	neovim
+    ntfs3g
     wget
     git
     gh
@@ -156,6 +137,7 @@
     bemenu
     swww
     mpv
+    mpvpaper
 
     hyprpolkitagent
     hyprshot
