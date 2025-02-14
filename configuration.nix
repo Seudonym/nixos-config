@@ -111,11 +111,14 @@
       xfce.thunar
       siyuan
       onlyoffice-desktopeditors
+      obsidian
     ];
   };
 
   environment.systemPackages = with pkgs; [
     gcc
+    llvmPackages_19.libcxxClang
+    llvmPackages_19.clang-tools
     cargo
     rustc
     rustfmt
@@ -123,9 +126,11 @@
     nil
 
   	neovim
+    ripgrep
     ntfs3g
     wget
     git
+    stow
     gh
     curl
 
@@ -138,6 +143,7 @@
     swww
     mpv
     mpvpaper
+    yt-dlp
 
     hyprpolkitagent
     hyprshot
