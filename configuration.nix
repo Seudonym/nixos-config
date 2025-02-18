@@ -47,7 +47,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    #jack.enable = true;
+    jack.enable = true;
     #media-session.enable = true;
   };
 
@@ -77,7 +77,6 @@
     LC_TIME = "en_IN";
   };
 
-  hardware.pulseaudio.enable = false;
   security = {
     rtkit.enable = true;
     polkit.enable = true;
@@ -104,7 +103,7 @@
   users.users.wahid = {
     isNormalUser = true;
     description = "Wahid Khan";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "dialout" ];
     packages = with pkgs; [
     	brave
       ghostty
@@ -112,17 +111,20 @@
       siyuan
       onlyoffice-desktopeditors
       obsidian
+      qbittorrent-enhanced
     ];
   };
 
   environment.systemPackages = with pkgs; [
     gcc
+    python313
     llvmPackages_19.libcxxClang
     llvmPackages_19.clang-tools
     cargo
     rustc
     rustfmt
     rust-analyzer
+    lua-language-server
     nil
 
   	neovim
