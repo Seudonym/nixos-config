@@ -117,7 +117,7 @@
 
   environment.systemPackages = with pkgs; [
     gcc
-    python313
+    (python3.withPackages (python-pkgs: with python-pkgs; [ watchdog ]))
     llvmPackages_19.libcxxClang
     llvmPackages_19.clang-tools
     cargo
@@ -134,10 +134,12 @@
     git
     stow
     gh
+    killall
     curl
 
     adw-gtk3
     adwaita-icon-theme
+    pywal
 
     cava
     waypaper
