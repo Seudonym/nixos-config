@@ -108,10 +108,11 @@
     	brave
       ghostty
       xfce.thunar
-      siyuan
       onlyoffice-desktopeditors
       obsidian
       qbittorrent-enhanced
+      spotify
+      spotifyd
     ];
   };
 
