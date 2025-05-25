@@ -84,9 +84,14 @@
   users.users.wahid = {
     isNormalUser = true;
     description = "Wahid Khan";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
+  };
+
+  # Enable docker
+  virtualisation.docker = {
+    enable = true;
   };
 
   # Enable zsh
@@ -98,10 +103,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim
-    git
-    gh
-    inputs.zen-browser.packages."${pkgs.system}".default
+    qemu
+    wezterm
   ];
 
   # For zsh completions

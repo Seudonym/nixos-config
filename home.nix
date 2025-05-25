@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   home.username = "wahid";
   home.homeDirectory = "/home/wahid";
 
@@ -44,7 +47,6 @@
     file
     which
     tree
-    colorscripts
 
     # nix related
     #
@@ -52,7 +54,7 @@
     # with more details log output
     nix-output-monitor
 
-    btop  # replacement of htop/nmon
+    btop # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
 
@@ -69,12 +71,24 @@
     # nvim tools
     gcc
     rust-analyzer
+    lua-language-server
+    stylua
     clang-tools
+    nil
+    alejandra
+
+    # daily tools
+    inputs.zen-browser.packages."${pkgs.system}".default
   ];
 
-  # basic configuration of git, please change to your own
+  # Git
   programs.git = {
     enable = true;
+  };
+
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper.enable = true;
   };
 
   # Neovim
@@ -98,6 +112,12 @@
     };
   };
 
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -114,6 +134,22 @@
     };
     shellAliases = {
     };
+    initContent = ''
+      bindkey '\e[3~' delete-char
+      bindkey '^R' history-incremental-search-backward # ctrl + r
+      bindkey -M viins '^[[3;5~' kill-word
+      bindkey '^H' vi-backward-kill-word # ctr + backspace
+      bindkey '^[[1;5C' forward-word # ctrl  + right
+      bindkey '^[[1;5D' backward-word # ctrl  + left
+      bindkey '^[[H' beginning-of-line # home
+      bindkey '^[[F' end-of-line # end
+    '';
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    options = ["--cmd cd"];
   };
 
   # This value determines the home Manager release that your
