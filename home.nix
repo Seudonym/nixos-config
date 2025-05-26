@@ -22,6 +22,11 @@
   #     xxx
   # '';
 
+  # Session variables
+  home.sessionVariables = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+  };
+
   # set cursor size and dpi for 4k monitor
   xresources.properties = {
     "Xcursor.size" = 16;
@@ -47,6 +52,9 @@
     file
     which
     tree
+    fd # Faster find alternative
+    bat # Better cat alternative
+    wl-clipboard
 
     # nix related
     #
@@ -69,16 +77,16 @@
     usbutils # lsusb
 
     # nvim tools
-    gcc
-    rust-analyzer
     lua-language-server
     stylua
-    clang-tools
     nil
     alejandra
+    gcc
 
     # daily tools
     inputs.zen-browser.packages."${pkgs.system}".default
+    obsidian
+    protonup
   ];
 
   # Git
