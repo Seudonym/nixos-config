@@ -87,11 +87,19 @@
     inputs.zen-browser.packages."${pkgs.system}".default
     obsidian
     protonup
+    discord
   ];
 
   # Git
   programs.git = {
     enable = true;
+    extraConfig = {
+      url = {
+        "https://github.com/Seudonym/" = {
+          insteadOf = "gh:";
+        };
+      };
+    };
   };
 
   programs.gh = {
@@ -141,6 +149,9 @@
       enable = true;
     };
     shellAliases = {
+      ls = "eza";
+      gs = "git status --short";
+      gcl = "git clone";
     };
     initContent = ''
       bindkey '\e[3~' delete-char
