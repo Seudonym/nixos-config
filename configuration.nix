@@ -19,6 +19,16 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.hostName = "zephyrus"; # Define your hostname.
+  networking.firewall = rec {
+    allowedTCPPortRanges = [
+      {
+        from = 1714;
+        to = 1764;
+      }
+    ];
+    allowedUDPPortRanges = allowedTCPPortRanges;
+  };
+
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -87,15 +97,30 @@
   users.users.wahid = {
     isNormalUser = true;
     description = "Wahid Khan";
-    extraGroups = ["networkmanager" "wheel" "docker"];
+    extraGroups = ["networkmanager" "wheel" "docker" "libvirtd"];
     packages = with pkgs; [];
     shell = pkgs.zsh;
   };
 
-  # Enable docker
-  virtualisation.docker = {
-    enable = true;
+  # Enable virtualisation features.
+  virtualisation = {
+    docker.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        swtpm.enable = true;
+        ovmf = {
+          enable = true;
+          packages = [
+            pkgs.OVMFFull.fd
+          ];
+        };
+      };
+    };
+    spiceUSBRedirection.enable = true;
   };
+  programs.virt-manager.enable = true;
 
   # Enable zsh
   programs.zsh.enable = true;
@@ -106,8 +131,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    qemu
     wezterm
+
+    # Virtualisation
+    virt-manager
+    qemu
   ];
 
   # For zsh completions
@@ -119,6 +147,8 @@
     noto-fonts-cjk-sans
     noto-fonts-emoji
     nerd-fonts.jetbrains-mono
+    vistafonts
+    corefonts
   ];
 
   # Gaming

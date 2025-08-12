@@ -7,6 +7,10 @@
   home.username = "wahid";
   home.homeDirectory = "/home/wahid";
 
+  imports = [
+    inputs.spicetify-nix.homeManagerModules.default
+  ];
+
   # link the configuration file in current directory to the specified location in home directory
   # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
 
@@ -54,6 +58,7 @@
     tree
     fd # Faster find alternative
     bat # Better cat alternative
+    dua
     wl-clipboard
 
     # nix related
@@ -82,13 +87,40 @@
     nil
     alejandra
     gcc
+    nodejs
+    marksman
+    # lemminx
 
     # daily tools
     inputs.zen-browser.packages."${pkgs.system}".default
+    chromium
     obsidian
     protonup
     discord
+    #spotify
+    onlyoffice-desktopeditors
+    jamesdsp
+    gemini-cli
+    zed-editor
   ];
+
+  # Spicetify
+  programs.spicetify = let
+    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+  in {
+    enable = true;
+    enabledExtensions = with spicePkgs.extensions; [
+      beautifulLyrics
+      fullAppDisplay
+    ];
+    enabledCustomApps = with spicePkgs.apps; [
+      marketplace
+      lyricsPlus
+    ];
+  };
+
+  # KDEConnect
+  services.kdeconnect.enable = true;
 
   # Git
   programs.git = {
