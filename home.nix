@@ -41,6 +41,7 @@
   home.packages = with pkgs; [
     # KDE
     papirus-icon-theme
+    whitesur-icon-theme
 
     # archives
     zip
@@ -81,7 +82,7 @@
     pciutils # lspci
     usbutils # lsusb
 
-    # nvim tools
+    # editor tools
     lua-language-server
     stylua
     nil
@@ -89,7 +90,7 @@
     gcc
     nodejs
     marksman
-    # lemminx
+    nixd
 
     # daily tools
     inputs.zen-browser.packages."${pkgs.system}".default

@@ -127,12 +127,13 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.android_sdk.accept_license = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wezterm
-
+    xorg.xhost
     # Virtualisation
     virt-manager
     qemu
@@ -176,6 +177,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.openssh.settings.X11Forwarding = true;
 
   # Enable Tailscale service [Mecha]
   services.tailscale.enable = true;
